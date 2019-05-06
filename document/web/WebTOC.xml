@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpTOC>
+
+  <HelpTOCNode Id="80fefa88-a844-4bdc-8dc4-b7d9e76d6bb6" Title="renjuzhihui.shiyu.barcode" Url="html/eadac59e-88d1-74c4-f5be-06707b689cac.htm">
+    <HelpTOCNode Id="5a6052f1-521a-43a0-a2b5-312d614bca44" Title="BarcodeTools Class" Url="html/c85b5b48-7328-c5bd-c1af-7c5f8f420df3.htm">
+      <HelpTOCNode Title="BarcodeTools Constructor " Url="html/86d62d88-dda6-e089-8ce6-811b47ffa174.htm" />
+      <HelpTOCNode Id="4abeede9-1497-42cb-916f-4db0973d87c2" Title="BarcodeTools Methods" Url="html/30ce15e5-6c46-b299-73cb-b5b9134e8d25.htm">
+        <HelpTOCNode Title="barcode_bit_matrix Method " Url="html/cb8e064a-f3be-66fb-5715-0af7ee982d55.htm" />
+        <HelpTOCNode Title="barcode_bitmap Method " Url="html/2dbfa896-cdd9-566f-86a0-a307f1301af1.htm" />
+        <HelpTOCNode Id="958ede81-f055-4f6e-8bbd-1ccb6b66f3d3" Title="format_transmit_data Method " Url="html/5ad7a972-d3e9-c3f5-9101-eec5d13aadb2.htm">
+          <HelpTOCNode Title="format_transmit_data Method (Byte[])" Url="html/977f8a18-3976-9811-f9fa-9418dc38dc0a.htm" />
+          <HelpTOCNode Title="format_transmit_data Method (String, Encoding)" Url="html/fb9121cf-3c80-a2bb-c3c9-a735c78e3f79.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="e57366c8-66c3-4e6b-9521-4f8f5531c38a" Title="HanXinCode Class" Url="html/24e5ec14-e360-55d3-1c0e-f7f535b47817.htm">
+      <HelpTOCNode Title="HanXinCode Constructor " Url="html/16be5e8c-8c3b-d3d6-6d4c-de2a5f605c17.htm" />
+      <HelpTOCNode Id="ecd39cf3-b2ae-4a2f-ad04-bd3d4c4b7d59" Title="HanXinCode Methods" Url="html/5084fabc-add5-678d-df0a-862100ab70a4.htm">
+        <HelpTOCNode Title="Encode Method " Url="html/3c7038c3-ede7-984b-4a01-99752f54f03e.htm" />
+        <HelpTOCNode Id="683fe807-79a9-4965-b41f-9ae3edc11c8d" Title="EncodeFromCommonData Method " Url="html/2873feb0-e3c4-a587-bbcc-f7a726b27719.htm">
+          <HelpTOCNode Title="EncodeFromCommonData Method (Byte[], Int32, Int32, Int32)" Url="html/38c5522d-9c64-abe3-ed03-220d058b1088.htm" />
+          <HelpTOCNode Title="EncodeFromCommonData Method (String, Int32, Int32, Int32)" Url="html/9d986737-aaed-e75f-7519-93fff9ee91da.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="37b59cd4-fb4f-40af-8e2b-e0b149d2accb" Title="HanXinCode Fields" Url="html/3fabf9fa-65aa-2640-022d-52aa2e14ff44.htm">
+        <HelpTOCNode Title="DEFAULT_ECI Field" Url="html/8e090a90-007b-9684-17db-809b49edcd62.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+</HelpTOC>

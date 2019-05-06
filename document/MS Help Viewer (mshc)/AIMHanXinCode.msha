@@ -1,0 +1,20 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>AIMHanXinCode - a Han Xin Code .Net Encoding Library</title>
+</head>
+<body class="vendor-book">
+    <div class="details">
+        <span class="vendor">Vendor Name</span>
+        <span class="locale">en-us</span>
+        <span class="product">AIMHanXinCode - a Han Xin Code .Net Encoding Library</span>
+        <span class="name">AIMHanXinCode - a Han Xin Code .Net Encoding Library</span>
+    </div>
+    <div class="package-list">
+        <div class="package">
+            <!-- NOTE: The "name" span value cannot contain any periods! -->
+            <span class="name">AIMHanXinCode</span>
+            <a class="current-link" href="AIMHanXinCode.mshc">AIMHanXinCode.mshc</a>
+        </div>
+    </div>
+</body>
+</html>
