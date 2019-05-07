@@ -1,0 +1,1165 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+AIMHanXinCode.Net
+</name>
+</assembly>
+<members>
+<member name="T:renjuzhihui.shiyu.barcode.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:renjuzhihui.shiyu.barcode.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:renjuzhihui.shiyu.barcode.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:renjuzhihui.shiyu.barcode.BarcodeTools">
+ <summary>
+ The utility tools Class for barcode
+ </summary>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.BarcodeTools.barcode_bitmap(System.Byte[0:,0:],System.Int32)">
+ <summary>
+ Construct Bitmap from symbol matrix
+ </summary>
+ <param name="symbol_matrix">The symbol matrix of two dimensional barcode</param>
+ <param name="pixels_per_module">pixels for each module</param>
+ <returns>
+ The bitmap after construction.
+ If it is nothing (null), there is some error occured in the construction process.
+ </returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.BarcodeTools.barcode_bit_matrix(System.Byte[0:,0:],System.Int32)">
+ <summary>
+ Construct bit matrix from symbol matrix
+ </summary>
+ <param name="symbol_matrix">The symbol matrix of two dimensional barcod</param>
+ <param name="pixels_per_module">pixels for each module</param>
+ <returns>
+ Bitmap: The bit matrix after construction.
+ If it is nothing (null), there is some error occured in the construction process.
+ </returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.BarcodeTools.format_transmit_data(System.String,System.Text.Encoding)">
+ <summary>
+ format common string data to data transmit byte data stream in accordance with AIM ECI specification.
+ </summary>
+ <remarks>Not consider the prefix ECI indicator.</remarks>
+ <param name="data">common string data</param>
+ <param name="str_encoding">The encoding of the common string data</param>
+ <returns>Byte[]: the transmit data stream under AIM ECI protocol.</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.BarcodeTools.format_transmit_data(System.Byte[])">
+ <summary>
+ format common byte stream data to data transmit byte data stream in accordance with AIM ECI specification.
+ </summary>
+ <param name="data">common byte stream data</param>
+ <returns>Byte[]: the transmit data stream under AIM ECI protocol.</returns>
+</member>
+<member name="T:renjuzhihui.shiyu.barcode.CodewordsStream">
+ <summary>
+ The Class used to represent information/data codeword stream
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.CodewordsStream._Data">
+ <summary>
+ The codewords
+ Please note: the order of codeword stream is from lowest degree to the highest degree.
+ it means the last element in array _Data, which is _Data[_Data.Length - 1], is the first codeword of codeword stream.
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.CodewordsStream._Version">
+ <summary>
+ The version of Han Xin Code (1-84)
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.CodewordsStream._ErrorCorrectionLevel">
+ <summary>
+ The Error Correction Level (ECL) of Han Xin Code (1:L1 to 4:L4)
+ </summary>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.CodewordsStream.#ctor">
+ <summary>
+ New function
+ </summary>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.CodewordsStream.#ctor(System.Byte[]@,System.Int32,System.Int32)">
+ <summary>
+ New function
+ </summary>
+ <param name="arrInfo">
+ The information codeword stream.
+ Please note: the order of codeword stream is from highest degree to the lowest degree.
+ it means the first element in array arrInfo, which is arrInfo[0], is the first codeword of codeword stream.
+ </param>
+ <param name="intVersion">The version of Han Xin Code (1-84)</param>
+ <param name="intErrorCorrectionLevel">The Error Correction Level (ECL) of Han Xin Code (1:L1 to 4:L4)</param>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.CodewordsStream.Finalize">
+ <summary>
+ Finalize function, Clear memory
+ </summary>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.CodewordsStream.Construct">
+ <summary>
+ Baisc Contruct and Init Functions
+ </summary>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.CodewordsStream.Construct(System.Byte[]@,System.Int32,System.Int32)">
+ <summary>
+ Construct data codeword stream from information codeword stream through padding and error correction and breakup (mod 13 randomize).
+ </summary>
+ <param name="arrInfo">
+ The information codeword stream.
+ Please note: the order of information codeword stream is from highest degree to the lowest degree.
+ it means the first element in array arrInfo, which is arrInfo[0], is the first codeword of  codeword stream.
+ </param>
+ <param name="intVersion">The version of Han Xin Code (1-84)</param>
+ <param name="intErrorCorrectionLevel">The Error Correction Level (ECL) of Han Xin Code (1:L1 to 4:L4)</param>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.CodewordsStream.Destruct">
+ <summary>
+ Clear memory or remove memory flag for GC collection
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.CodewordsStream.ECLParameters">
+ <summary>
+ Static parameter table for error correction paramters for each version and ECL
+ </summary>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.CodewordsStream.GetParameter(System.Int32,System.Int32)">
+ <summary>
+ Get the error correction parameters, i.e. blocks and its (n, k)
+ </summary>
+ <param name="intVersion">The version of Han Xin Code (1-84)</param>
+ <param name="intCorrectionLevel">The Error Correction Level (ECL) of Han Xin Code (1:L1 to 4:L4)</param>
+ <returns>
+ a 9 elements Integer array:
+ (c1, n1, k1, c2, n2, k2, c3, n3, k3)
+ </returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.CodewordsStream.ChooseVersionAndErrorCorrectionLevel(System.Int32,System.Int32@,System.Int32@)">
+ <summary>
+ Automatically choose the version and ECL to contain data
+ </summary>
+ <param name="intLengthOfInformationCodewordStream">The length of information codeword stream</param>
+ <param name="intVersion">
+ Input and Output parameter.
+ For input is the user-defined version.
+ For output is the choosen version.
+ Note that, even if the version is user-defined, it may change to a suitable higher version which can contain the data.
+ </param>
+ <param name="intErrorCorrectionLevel">
+ Input and Output parameter.
+ For input is the user-defined ECL.
+ For output is the choosen ECL.
+ Note that, even if the ECL is user-defined, it may change to a suitable lower ECL which can contain the data.
+ </param>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.CodewordsStream.InitGFField">
+ <summary>
+ Init the GF of Error Correction
+ </summary>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.CodewordsStream.BreakUp(System.Byte[]@,System.Int32)">
+ <summary>
+ Breakup the data codeword stream into final data codeword stream
+ </summary>
+ <param name="arrData">
+ Input and Output parameter.
+ For input, it is the orignal data codeword stream.
+ For output, it is the final data codeword stream.
+ Please note: the order of codeword stream is from lowest degree to the highest degree.
+ it means the last element in array arrInfo, which is arrInfo[arrInfo.Length - 1], is the first codeword of codeword stream.
+ </param>
+ <param name="intGroupSize">The breakup size of Han Xin Code, default (based on the specification) is 13</param>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.CodewordsStream.GF_Log(System.Byte)">
+ <summary>
+ Calculate the log value of a GF number x, which means y = log(x), x = alpha(2)^y
+ </summary>
+ <param name="byteGFVal">The GF value</param>
+ <returns>The log value</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.CodewordsStream.GF_Power(System.Int32)">
+ <summary>
+ Calculte the power of the generator element (alpha 2)
+ </summary>
+ <param name="intPower">The power value</param>
+ <returns>The calculated result which is 2^<paramref name="intPower"/></returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.CodewordsStream.RS_GeneratorPoly(System.Int32)">
+ <summary>
+ Get the generator polynomial of given error count (t)
+ </summary>
+ <param name="intT">Error count (t)</param>
+ <returns>
+ Byte[] : the generator polynomial.
+ Note that for the index is the power of x, it means index 0 is x^0, index n is x^n.
+ So, if you have a error count t, the error correction codewrod will be numbered 2t.
+ So the generator polynomial byte array has 2t+1 elements. index is from 0 to 2t.
+ </returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.CodewordsStream.RS_Encode(System.Byte[]@)">
+ <summary>
+ RS error correction encoding.
+ </summary>
+ <param name="arrInfo">
+ Information Codeword Stream.
+ Please note: the order of codeword stream is from highest degree to the lowest degree.
+ it means the first element in array arrInfo, which is arrInfo[0], is the first codeword of information.
+ </param>
+ <returns>
+ Byte[] : The Data Codeword Stream.
+ Here is stream not poly. it means it will fill the n data codewords in the stream, not like poly need to be normalized.
+ Please note: the order of codeword stream is from lowest degree to the highest degree.
+ it means the last element in array, which is array[array.Length - 1], is the first codeword of information.
+ </returns>
+</member>
+<member name="P:renjuzhihui.shiyu.barcode.CodewordsStream.DataCodewordStream">
+ <summary>
+ Get the data codeword stream.
+ </summary>
+ <returns>
+ Byte[]: the data codeword stream. If after Construct, it is the final data codeword stream after breakup.
+ Please note: the order of codeword stream is from lowest degree to the highest degree.
+ it means the last element in array, which is array[array.Length - 1], is the first codeword of codeword stream.
+ </returns>
+</member>
+<member name="P:renjuzhihui.shiyu.barcode.CodewordsStream.DataCodewordStreamInNormalOrder">
+ <summary>
+ Get the data codeword stream (in normal order).
+ </summary>
+ <returns>
+ Byte[]: the data codeword stream. If after Construct, it is the final data codeword stream after breakup.
+ Please note: the order of codeword stream is from highest degree to the lowest degree.
+ it means the first element in array, which is array[0], is the first codeword of codeword stream.
+ </returns>
+</member>
+<member name="P:renjuzhihui.shiyu.barcode.CodewordsStream.Version">
+ <summary>
+ Get the version of Han Xin Code
+ </summary>
+ <returns>Integer: version of Han Xin Code</returns>
+</member>
+<member name="P:renjuzhihui.shiyu.barcode.CodewordsStream.ErrorCorrectionLevel">
+ <summary>
+ Get the error correction level (ECL) of Han Xin Code
+ </summary>
+ <returns>Integer: error correction level (ECL) of Han Xin Code</returns>
+</member>
+<member name="P:renjuzhihui.shiyu.barcode.CodewordsStream.Length">
+ <summary>
+ Get the length of codeword stream
+ </summary>
+ <returns>Integer: the length of codeword stream</returns>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.StructuralInformationCodewordsStream._Data">
+ <summary>
+ Structural Information codewords.
+ Please note: the order of codeword stream is from lowest degree to the highest degree.
+ it means the last element in array, which is array[array.Length - 1], is the first codeword of codeword stream.
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.StructuralInformationCodewordsStream._Version">
+ <summary>
+ The version of Han Xin Code
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.StructuralInformationCodewordsStream._ErrorCorrectionLevel">
+ <summary>
+ The error correction level (ECL) of Han Xin Code
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.StructuralInformationCodewordsStream._MaskType">
+ <summary>
+ The maksing solution of Han Xin Code
+ </summary>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.StructuralInformationCodewordsStream.#ctor(System.Int32,System.Int32,System.Int32)">
+ <summary>
+ The New method
+ </summary>
+ <param name="intVersion">The version of Han Xin Code (1 to 84)</param>
+ <param name="intErrorCorrectionLevel">The error correction level (ECL) of Han Xin Code (1 to 4)</param>
+ <param name="intMaskType">The maksing solution of Han Xin Code (0 to 3)</param>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.StructuralInformationCodewordsStream.Finalize">
+ <summary>
+ The Finalize method
+ </summary>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.StructuralInformationCodewordsStream.GF_Log(System.Byte)">
+ <summary>
+ Calculate the log value of a GF number x, which means y = log(x), x = alpha(2)^y
+ </summary>
+ <param name="byteGFVal">The GF value</param>
+ <returns>The log value</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.StructuralInformationCodewordsStream.GF_Power(System.Int32)">
+ <summary>
+ Calculte the power of the generator element (alpha 2)
+ </summary>
+ <param name="intPower">The power value</param>
+ <returns>The calculated result which is 2^<paramref name="intPower"/></returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.StructuralInformationCodewordsStream.RS_GeneratorPoly(System.Int32)">
+ <summary>
+ Get the generator polynomial of given error count (t)
+ </summary>
+ <param name="intT">Error count (t)</param>
+ <returns>
+ Byte[] : the generator polynomial.
+ Note that for the index is the power of x, it means index 0 is x^0, index n is x^n.
+ So, if you have a error count t, the error correction codewrod will be numbered 2t.
+ So the generator polynomial byte array has 2t+1 elements. index is from 0 to 2t.
+ </returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.StructuralInformationCodewordsStream.RS_Encode(System.Byte[]@)">
+ <summary>
+ RS error correction encoding.
+ </summary>
+ <param name="arrInfo">
+ Information Codeword Stream.
+ Please note (!!!not like Data codeword stream): the order of codeword stream is from lowest degree to the highest degree.
+ it means the last element in array arrInfo, which is arrInfo[arrInfo.Length - 1], is the first codeword of information.
+ </param>
+ <returns>
+ Byte[] : The Structural Information Codeword Stream.
+ Here is stream not poly. it means it will fill the n data codewords in the stream, not like poly need to be normalized.
+ Please note: the order of codeword stream is from lowest degree to the highest degree.
+ it means the last element in array, which is array[array.Length - 1], is the first codeword of information.
+ </returns>
+</member>
+<member name="P:renjuzhihui.shiyu.barcode.StructuralInformationCodewordsStream.Data">
+ <summary>
+ Get the structural information codeword stream.
+ </summary>
+ <returns>
+ Byte[]: the structural information codeword.
+ Please note: the order of codeword stream is from lowest degree to the highest degree.
+ it means the last element in array, which is array[array.Length - 1], is the first codeword of codeword stream.
+ </returns>
+</member>
+<member name="P:renjuzhihui.shiyu.barcode.StructuralInformationCodewordsStream.DataInNormalOrder">
+ <summary>
+ Get the structural information codeword stream (in normal order).
+ </summary>
+ <returns>
+ Byte[]: the structural information codeword stream.
+ Please note: the order of codeword stream is from highest degree to the lowest degree.
+ it means the first element in array, which is array[0], is the first codeword of codeword stream.
+ </returns>
+</member>
+<member name="P:renjuzhihui.shiyu.barcode.StructuralInformationCodewordsStream.Version">
+ <summary>
+ Get the version of Han Xin Code
+ </summary>
+ <returns>Integer: version of Han Xin Code</returns>
+</member>
+<member name="P:renjuzhihui.shiyu.barcode.StructuralInformationCodewordsStream.ErrorCorrectionLevel">
+ <summary>
+ Get the error correction level (ECL) of Han Xin Code
+ </summary>
+ <returns>Integer: error correction level (ECL) of Han Xin Code</returns>
+</member>
+<member name="P:renjuzhihui.shiyu.barcode.StructuralInformationCodewordsStream.MaskType">
+ <summary>
+ Get the masking solution of Han Xin Code
+ </summary>
+ <returns>Integer: masking solution of Han Xin Code</returns>
+</member>
+<member name="T:renjuzhihui.shiyu.barcode.CodewordsStreamException">
+ <summary>
+ The Exception Class for Data Codeword Stream and Structural Information Codeword Stream
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.CodewordsStreamException._code">
+ <summary>
+ Error Code
+ </summary>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.CodewordsStreamException.#ctor(System.Int32,System.String,System.Exception)">
+ <summary>
+ New Method
+ </summary>
+ <param name="code">The error code of the exception</param>
+ <param name="strMessage">The message of the exception</param>
+ <param name="innerException">The inner exception of the exception</param>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.CodewordsStreamException.#ctor(System.Int32,System.String)">
+ <summary>
+ New Method
+ </summary>
+ <param name="code">The error code of the exception</param>
+ <param name="strMessage">The message of the exception</param>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.CodewordsStreamException.#ctor(System.Int32)">
+ <summary>
+ New Method
+ </summary>
+ <param name="code">The error code of the exception</param>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.CodewordsStreamException.#ctor(System.String,System.Exception)">
+ <summary>
+ New Method
+ </summary>
+ <param name="strMessage">The message of the exception</param>
+ <param name="innerException">The inner exception of the exception</param>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.CodewordsStreamException.#ctor(System.String)">
+ <summary>
+ New Method
+ </summary>
+ <param name="strMessage">The message of the exception</param>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.CodewordsStreamException.#ctor">
+ <summary>
+ Default empty New method
+ </summary>
+</member>
+<member name="P:renjuzhihui.shiyu.barcode.CodewordsStreamException.ErrCode">
+ <summary>
+ Get the Error Code
+ </summary>
+ <returns>Integer: The error code of the exception</returns>
+</member>
+<member name="T:renjuzhihui.shiyu.barcode.HanXinCode">
+ <summary>
+ class for Han Xin Code encoding processes
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.HanXinCode.DEFAULT_ECI">
+ <summary>
+ The Defaul ECI of Han Xin Code \000003
+ </summary>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.HanXinCode.EncodeFromCommonData(System.Byte[],System.Int32@,System.Int32@,System.Int32)">
+ <summary>
+ Encoding function of Han Xin Code.
+ </summary>
+ <param name="data">Data will be encoded into Han Xin Code.</param>
+ <param name="version">
+ User-chosen version of Han Xin Code.
+ <para>The returnable value of this parameter will be the final version chosen by encoding process. This will be happen, if user-chosen version of Han Xin Code cannot contain all of data.</para>
+ <para>If the version of Han Xin Code could not be easily considered, please set to 0.</para>
+ </param>
+ <param name="error_correction_level">
+ User-chosen error correction level of Han Xin Code.
+ <para>1(L1): 8%</para>
+ <para>2(L2):15%</para>
+ <para>3(L3):23%</para>
+ <para>4(L4):30%</para>
+ </param>
+ <param name="quiet_zone_size">User-chosen quiet zone in modules of Han Xin Code.</param>
+ <returns>
+ Result of encoding process.
+ <para>If encoding process successes, the result will be a two dimensional Byte array.</para>
+ <para>If encoding process fails, the result will be Nothing.</para>
+ </returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.HanXinCode.EncodeFromCommonData(System.String,System.Int32@,System.Int32@,System.Int32)">
+ <summary>
+ Encoding function of Han Xin Code.
+ </summary>
+ <param name="content">Content will be encoded into Han Xin Code.</param>
+ <param name="version">
+ User-chosen version of Han Xin Code.
+ <para>The returnable value of this parameter will be the final version chosen by encoding process. This will be happen, if user-chosen version of Han Xin Code cannot contain all of data.</para>
+ <para>If the version of Han Xin Code could not be easily considered, please set to 0.</para>
+ </param>
+ <param name="error_correction_level">
+ User-chosen error correction level of Han Xin Code.
+ <para>1(L1): 8%</para>
+ <para>2(L2):15%</para>
+ <para>3(L3):23%</para>
+ <para>4(L4):30%</para>
+ </param>
+ <param name="quiet_zone_size">User-chosen quiet zone in modules of Han Xin Code.</param>
+ <returns>
+ Result of encoding process.
+ <para>If encoding process successes, the result will be a two dimensional Byte array.</para>
+ <para>If encoding process fails, the result will be Nothing.</para>
+ </returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.HanXinCode.Encode(System.Byte[],System.Int32@,System.Int32@,System.Int32,System.Int32)">
+ <summary>
+ Encoding function of Han Xin Code.
+ </summary>
+ <param name="transmit_data">Transmit data will be encoded into Han Xin Code. The transmit data must meet requirements of AIM ECI specifications.</param>
+ <param name="version">
+ User-chosen version of Han Xin Code.
+ <para>The returnable value of this parameter will be the final version chosen by encoding process. This will be happen, if user-chosen version of Han Xin Code cannot contain all of data.</para>
+ <para>If the version of Han Xin Code could not be easily considered, please set to 0.</para>
+ </param>
+ <param name="error_correction_level">
+ User-chosen error correction level of Han Xin Code.
+ <para>1(L1): 8%</para>
+ <para>2(L2):15%</para>
+ <para>3(L3):23%</para>
+ <para>4(L4):30%</para>
+ </param>
+ <param name="user_chosen_ECI">
+ User-chosen ECI of Han Xin Code.
+ <para>If ECI could not be easily considered, please set to DEFAULT_ECI(\000003).</para>
+ </param>
+ <param name="quiet_zone_size">User-chosen quiet zone in modules of Han Xin Code.</param>
+ <returns>
+ Result of encoding process.
+ <para>If encoding process successes, the result will be a two dimensional Byte array.</para>
+ <para>If encoding process fails, the result will be Nothing.</para>
+ </returns>
+</member>
+<member name="T:renjuzhihui.shiyu.barcode.Info">
+ <summary>
+ The Class used for Han Xin Code Information Encoding Process
+ </summary>
+</member>
+<member name="T:renjuzhihui.shiyu.barcode.Info.MODE">
+ <summary>
+ Enum for Mode
+ </summary>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.Info.calcute_encoding_length(System.Byte[]@,renjuzhihui.shiyu.barcode.Info.MODE[]@,System.Int32)">
+ <summary>
+ Calculate the encoding length.
+ </summary>
+ <param name="transmit_data">The transmit data followed Han Xin specification and AIM ECI</param>
+ <param name="data_analysis_result">The data analysis result</param>
+ <param name="user_chosen_ECI">the user choosen ECI</param>
+ <returns>Integer: the encoding length in bit</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.Info.Encode(System.Byte[]@,System.Int32)">
+ <summary>
+ Information Encoding Function
+ </summary>
+ <param name="transmit_data">The transmit data followed Han Xin specification and AIM ECI</param>
+ <param name="user_chosen_ECI">User chosen ECI</param>
+ <returns>Byte[]: Information Codeword Stream in normal order (first element is the first element of the stream.)</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.Info.bitstream_to_codewordstream(System.Collections.ArrayList@)">
+ <summary>
+ Convert bit stream to codeword stream
+ </summary>
+ <param name="bitstream">bit stream</param>
+ <returns>Byte[]: codeword stream</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.Info.convert_uint_to_bit(System.Int32,System.Int32)">
+ <summary>
+ Convert data to bit stream
+ </summary>
+ <param name="data">Data</param>
+ <param name="bits">bits per Data</param>
+ <returns>Byte[]: bit stream for Data</returns>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.Info.encoding_value_for_TEXT_MODE_TEXT1_SUBMODE">
+ <summary>
+ TEXT Mode TEXT1 Sub-mode encoding table, first column is the ASCII value, second column is the encoding value
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.Info.encoding_value_for_TEXT_MODE_TEXT2_SUBMODE">
+ <summary>
+ TEXT Mode TEXT2 Sub-mode encoding table, first column is the ASCII value, second column is the encoding value
+ </summary>
+</member>
+<member name="T:renjuzhihui.shiyu.barcode.Module_Const">
+ <summary>
+ Constances for whole program
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.Module_Const.INIT_VAL">
+ <summary>
+ Initial value for symbol matrix, used to indicate which module can be placed.
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.Module_Const.FUNCTION_INIT_VAL">
+ <summary>
+ Initial value of the structural information region for symbol matrix, used to indicate which module can be placed.
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.Module_Const.WHITE_VAL">
+ <summary>
+ White/high reflection module value
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.Module_Const.BLACK_VAL">
+ <summary>
+ Black/low reflection module value
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.Module_Const.PENALTY_GRADE_FOR_POSITION_DETECTION_PATTERN_RATIO">
+ <summary>
+ Penalty grade for poistion detection pattern ratio, which may appear in symbol matrix after data placement and masking
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.Module_Const.PENALTY_GRADE_FOR_CONTINUOUS_LINE">
+ <summary>
+ Penalty grade for black/white line (>3 continuous same color modules)
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.Module_Const.MIN_VERSION">
+ <summary>
+ The minimum version of Han Xin Code
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.Module_Const.MAX_VERSION">
+ <summary>
+ The maximum version of Han Xin Code
+ </summary>
+</member>
+<member name="T:renjuzhihui.shiyu.barcode.ReedSolomonBase">
+ <summary>
+ The abstract class of Reed Solomon Error Correction Encoding
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.ReedSolomonBase._power">
+ <summary>
+ The power of GF, m
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.ReedSolomonBase._order">
+ <summary>
+ The order of GF, 2^m
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.ReedSolomonBase._generator">
+ <summary>
+ The generator of GF, alpha
+ </summary>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.GF_Log(System.Byte)">
+ <summary>
+ Calculate the log value of a GF number x, which means y = log(x), x = alpha(2)^y
+ </summary>
+ <param name="byteGFVal">The GF value</param>
+ <returns>The log value</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.GF_Power(System.Int32)">
+ <summary>
+ Calculte the power of the generator element (alpha 2)
+ </summary>
+ <param name="intPower">The power value</param>
+ <returns>The calculated result which is 2^<paramref name="intPower"/></returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.GF_Check(System.Byte)">
+ <summary>
+ Check wether a number is a GF number (which is inside the appropriate range [0, _order - 1]) of a GF.
+ </summary>
+ <param name="byteGfVal">The number</param>
+ <returns>Boolean: whether is a GF Number in this GF.</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.GF_Add(System.Byte,System.Byte)">
+ <summary>
+ Add operator of two GF value
+ </summary>
+ <param name="byteGfValL">GF value 1</param>
+ <param name="byteGfValR">GF value 2</param>
+ <returns>The result of Add operator of two GF value</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.GF_Sub(System.Byte,System.Byte)">
+ <summary>
+ Subtraction operator of two GF value
+ </summary>
+ <param name="byteGfValL">GF value 1</param>
+ <param name="byteGfValR">GF value 2</param>
+ <returns>The result of Subtraction operator of two GF value</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.GF_Mul(System.Byte,System.Byte)">
+ <summary>
+ Multiplication operator of two GF value
+ </summary>
+ <param name="byteGfValL">GF value 1</param>
+ <param name="byteGfValR">GF value 2</param>
+ <returns>The result of Multiplication operator of two GF value</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.GF_Div(System.Byte,System.Byte)">
+ <summary>
+ Division operator of two GF value
+ </summary>
+ <param name="byteGfValL">GF value 1</param>
+ <param name="byteGfValR">GF value 2</param>
+ <returns>The result of Division operator of two GF value</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.GF_Invert(System.Byte)">
+ <summary>
+ ^-1 operator of GF value
+ </summary>
+ <param name="byteGfVal">GF value</param>
+ <returns>The result of ^-1 operator of GF value</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.GF_Power(System.Byte,System.Int32)">
+ <summary>
+ Pow(x) operator of GF value (x)
+ </summary>
+ <param name="byteGfBase">GF value (x)</param>
+ <param name="intPower">the power</param>
+ <returns>The result of Pow(x) operator of GF value (x)</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.GFPoly_Resize(System.Byte[]@,System.Int32)">
+ <summary>
+ Resize a poly to a given degree poly.
+ </summary>
+ <param name="arrPoly">
+ Input and Ouput parameter:
+ Input is the poly wish to resized.
+ Ouput is the poly after resized.
+ </param>
+ <param name="intDegree">The expected degree of the poly.</param>
+ <returns>Boolean: whether succeed.</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.GFPoly_Div(System.Byte[]@,System.Byte[]@,System.Byte[]@)">
+ <summary>
+ Calculate the division of two poly
+ </summary>
+ <param name="arrPolyL">The left operation poly</param>
+ <param name="arrPolyR">The right operation poly</param>
+ <param name="arrPolyRemainder">Output parameter: the Remainder of the division</param>
+ <returns>the Quetient of the division</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.GFPoly_Mul_X_t(System.Byte[]@,System.Int32)">
+ <summary>
+ Calculate a poly multiply by x^t
+ </summary>
+ <param name="arrPoly">The poly</param>
+ <param name="intT">the t</param>
+ <returns>The result of poly multiply by x^t</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.GFPoly_Mul(System.Byte[]@,System.Byte[]@)">
+ <summary>
+ Calculate multiplication of two poly
+ </summary>
+ <param name="arrPolyL">L poly of the multiplication</param>
+ <param name="arrPolyR">R poly of the multiplication</param>
+ <returns>The multiplication result of two poly</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.GFPoly_Mul(System.Byte,System.Byte[]@)">
+ <summary>
+ Calculate multiplication of a poly and a GF number
+ </summary>
+ <param name="byteGfVal">The GF number</param>
+ <param name="arrPoly">The GF poly</param>
+ <returns>The result of multiplication of the GF poly and the GF number</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.GFPoly_Sub(System.Byte[]@,System.Byte[]@)">
+ <summary>
+ Calculate Subtraction of two poly
+ </summary>
+ <param name="arrPolyL">L poly of the Subtraction</param>
+ <param name="arrPolyR">R poly of the Subtraction</param>
+ <returns>The Subtraction result of two poly</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.GFPoly_Add(System.Byte[]@,System.Byte[]@)">
+ <summary>
+ Calculate Addition of two poly
+ </summary>
+ <param name="arrPolyL">L poly of the Addition</param>
+ <param name="arrPolyR">R poly of the Addition</param>
+ <returns>The Addition result of two poly</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.GFPoly_GetCoefficient(System.Byte[]@,System.Int32)">
+ <summary>
+ Get the coefficient of a given degree from the poly
+ </summary>
+ <param name="arrPoly">the GF poly</param>
+ <param name="intDegree">The given degree</param>
+ <returns></returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.GFPoly_GetValue(System.Byte[]@,System.Byte)">
+ <summary>
+ Calculate the value of a poly(x) by using a given value of x
+ </summary>
+ <param name="arrPoly">The GF poly - poly(x)</param>
+ <param name="byteGFVal">The given value of x</param>
+ <returns>The result after calculation</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.GFPoly_removeHighZeros(System.Byte[]@)">
+ <summary>
+ remove the unnecessary high degree zero coefficient of a poly (normalization)
+ </summary>
+ <param name="arrPoly">
+ Input and Output parameter:
+ The poly need to be normalized.
+ </param>
+ <returns>Boolean: whether succeed.</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.GFPoly_StrictDegree(System.Byte[]@)">
+ <summary>
+ Get the "strict" degree of a GF poly, especially when has high degree zero coefficient
+ </summary>
+ <param name="arrPoly">GF poly</param>
+ <returns>the "strict" degree of the GF poly</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.GFPoly_Degree(System.Byte[]@)">
+ <summary>
+ The highest degree of a GF poly
+ </summary>
+ <remarks>
+ Note that: the coefficient of the highest degree of GF poly may be zero (0)
+ </remarks>
+ <param name="arrPoly">GF poly</param>
+ <returns>The highest degree of a GF poly</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.GFPoly_Check(System.Byte[]@)">
+ <summary>
+ Check whether the input GF poly meet the requirements of this GF.
+ </summary>
+ <param name="arrPoly">GF poly</param>
+ <returns>Boolean: whether the poly is suitable.</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.RS_GeneratorPoly(System.Int32)">
+ <summary>
+ Get the generator polynomial of given error count (t)
+ </summary>
+ <param name="intT">Error count (t)</param>
+ <returns>
+ Byte[] : the generator polynomial.
+ Note that for the index is the power of x, it means index 0 is x^0, index n is x^n.
+ So, if you have a error count t, the error correction codewrod will be numbered 2t.
+ So the generator polynomial byte array has 2t+1 elements. index is from 0 to 2t.
+ </returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.RS_Encode(System.Byte[]@)">
+ <summary>
+ RS error correction encoding.
+ </summary>
+ <param name="arrInfo">
+ Information Codeword Stream.
+ Please note: the order of codeword stream can be normal order (from highest to lowest) or unnormal order (from lowest to highest).
+ Different implementation of this function can have different algorithms.
+ </param>
+ <returns>
+ Byte[] : The Data Codeword Stream.
+ Here is stream not poly. it means it will fill the n data codewords in the stream, not like poly need to be normalized.
+ Please note: the order of codeword stream is from lowest degree to the highest degree.
+ it means the last element in array, which is array[array.Length - 1], is the first codeword of information.
+ </returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonBase.RS_BlockEncode(System.Byte[]@,System.Int32)">
+ <summary>
+ RS block encoding
+ </summary>
+ <param name="arrInfo">
+ The information codewords (poly).
+ Not that for the index is the power of x, it means index 0 is x^0, index n is x^n.
+ </param>
+ <param name="intT">The error correction capacity t, 2t = n - k</param>
+ <returns>
+ The data codewords (poly).
+ Not that for the index is the power of x, it means index 0 is x^0, index n is x^n.
+ </returns>
+</member>
+<member name="T:renjuzhihui.shiyu.barcode.ReedSolomonException">
+ <summary>
+ The Exception class used in Reed Solomon Error Correction
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.ReedSolomonException._code">
+ <summary>
+ Error code
+ </summary>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonException.#ctor(System.Int32,System.String,System.Exception)">
+ <summary>
+ New Method
+ </summary>
+ <param name="code">The error code of the exception</param>
+ <param name="strMessage">The message of the exception</param>
+ <param name="innerException">The inner exception of the exception</param>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonException.#ctor(System.Int32,System.String)">
+ <summary>
+ New Method
+ </summary>
+ <param name="code">The error code of the exception</param>
+ <param name="strMessage">The message of the exception</param>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonException.#ctor(System.Int32)">
+ <summary>
+ New Method
+ </summary>
+ <param name="code">The error code of the exception</param>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonException.#ctor(System.String,System.Exception)">
+ <summary>
+ New Method
+ </summary>
+ <param name="strMessage">The message of the exception</param>
+ <param name="innerException">The inner exception of the exception</param>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonException.#ctor(System.String)">
+ <summary>
+ New Method
+ </summary>
+ <param name="strMessage">The message of the exception</param>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.ReedSolomonException.#ctor">
+ <summary>
+ Default New Method
+ </summary>
+</member>
+<member name="P:renjuzhihui.shiyu.barcode.ReedSolomonException.ErrCode">
+ <summary>
+ Get the error code of the exception
+ </summary>
+ <returns>Integer: the error code of the exception</returns>
+</member>
+<member name="T:renjuzhihui.shiyu.barcode.Symbol">
+ <summary>
+ The Class used to define Han Xin Code Symbol
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.Symbol._Data">
+ <summary>
+ The two-dimensional Byte array to store barcode modules,
+ for each elemenet in the array is one module,
+ the first index is the height index from 0 ro height - 1 of the symbol matrix,
+ the second index is the width index from 0 to width - 1 of the symbol matrix.
+ 1 means black/low reflection, 0 means white/high reflection
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.Symbol._Width">
+ <summary>
+ The width of the symbol matrix
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.Symbol._Height">
+ <summary>
+ The height of the symbol matrix
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.Symbol._Version">
+ <summary>
+ The version of Han Xin Code symobol
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.Symbol._MaskType">
+ <summary>
+ The masking solution of the Han Xin Code symbology
+ </summary>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.Symbol.#ctor">
+ <summary>
+ The default construction function
+ </summary>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.Symbol.#ctor(System.Int32,System.Int32)">
+ <summary>
+ The contstruction function
+ </summary>
+ <param name="intVersion">The version of Han Xin Code</param>
+ <param name="intMaskType">The masking solution of Han Xin Code symbol</param>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.Symbol.Finalize">
+ <summary>
+ Dispose process
+ </summary>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.Symbol.Construct(System.Int32,System.Int32)">
+ <summary>
+ Construct the basic symbol matrix
+ </summary>
+ <param name="intWidth">The width of the symbol matrix</param>
+ <param name="intHeight">The height of the symbol matrix</param>
+ <returns>Boolean: whehter the construction process succeed.</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.Symbol.Destruct">
+ <summary>
+ Clear memory or remove memory flag for GC collection
+ </summary>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.Symbol.ConstructTemplate(System.Byte[0:,0:]@)">
+ <summary>
+ Construct Han Xin Code symbol template,
+ place finder pattern and alignment pattern
+ </summary>
+ <param name="arrData">The symbol matrix</param>
+ <returns>Boolean: whehter the construction process succeed.</returns>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.Symbol.arrAlignmentParameters">
+ <summary>
+ The AlignmentParameters for each version
+ </summary>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.Symbol.GetAlignmentParameter(System.Int32,System.Int32@,System.Int32@)">
+ <summary>
+ Get the (r, k) parameter of the alignment pattern of Han Xin symbology
+ </summary>
+ <param name="intModules">The count of modules for each side of Han Xin Code symbology </param>
+ <param name="r">Output parameter: The r parameter of the alignment pattern of Han Xin symbology</param>
+ <param name="k">Output parameter: The k parameter of the alignment pattern of Han Xin symbology</param>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.Symbol.GetSize(System.Int32,System.Int32@,System.Int32@)">
+ <summary>
+ Get the width and height of Han Xin Code symbol
+ </summary>
+ <param name="intVersion">The version of the Han Xin Code symbol</param>
+ <param name="intWidth">Output parameter: The width in modules of the Han Xin Code symbol</param>
+ <param name="intHeight">Output parameter: The height in modules of the Han Xin Code symbol</param>
+ <returns>Boolean: wether the function is succeed.</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.Symbol.GetDataCodewordsCap(System.Int32)">
+ <summary>
+ Get the codeword capacity of Han Xin Code symbol
+ </summary>
+ <param name="intVersion">The version of the Han Xin Code symbol</param>
+ <returns>Integer: The codeword capacity of Han Xin Code symbol</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.Symbol.FillStructuralInformation(System.Byte[]@)">
+ <summary>
+ Place structural information
+ </summary>
+ <param name="structuralCodewords">
+ codewords of structural information.
+ Please note the codewords of structural information is from lowest degree to the highest degree,
+ it means the last element in array codewordsFunciotn, which is structuralCodewords[structuralCodewords.Length - 1], is the first codeword of structural information.
+ </param>
+ <returns>Boolean: whether the process succeed.</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.Symbol.FillData(System.Byte[]@)">
+ <summary>
+ Data Placement
+ </summary>
+ <param name="codewordsData">
+ The final data codeword stream.
+ Please note the codewords is from lowest degree to the highest degree,
+ it means the last element in array codewordsData,
+ which is codewordsData[codewordsData.Length - 1],
+ is the first codeword of final data codeword stream.
+ </param>
+ <returns>Boolean: whether the process succeed.</returns>
+</member>
+<member name="P:renjuzhihui.shiyu.barcode.Symbol.Width">
+ <summary>
+ Get the width of Han Xin Code symbol
+ </summary>
+ <returns>Integer: the width of Han Xin Code symbol</returns>
+</member>
+<member name="P:renjuzhihui.shiyu.barcode.Symbol.Height">
+ <summary>
+ Get the height of Han Xin Code symbol
+ </summary>
+ <returns>Integer: the height of Han Xin Code symbol</returns>
+</member>
+<member name="P:renjuzhihui.shiyu.barcode.Symbol.Version">
+ <summary>
+ Get the version of Han Xin Code symbol
+ </summary>
+ <returns>Integer: the version of Han Xin Code symbol</returns>
+</member>
+<member name="P:renjuzhihui.shiyu.barcode.Symbol.MaskType">
+ <summary>
+ Get the masking solution of Han Xin Code symbol
+ </summary>
+ <returns>Integer: the masking solution of Han Xin Code symbol</returns>
+</member>
+<member name="P:renjuzhihui.shiyu.barcode.Symbol.Data">
+ <summary>
+ Get the symbol matrix of Han Xin Code symbol
+ </summary>
+ <remarks>
+ The two-dimensional Byte array to store barcode modules,
+ for each elemenet in the array is one module,
+ the first index is the height index from 0 ro height - 1 of the symbol matrix,
+ the second index is the width index from 0 to width - 1 of the symbol matrix.
+ 1 means black/low reflection, 0 means white/high reflection
+ </remarks>
+ <returns>Byte[,]: the symbol matrix of Han Xin Code symbol.</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.Symbol.Mask(System.Int32@)">
+ <summary>
+ Public Masking method
+ </summary>
+ <param name="intMaskType">Masking solution of Han Xin Code from 0 to 3</param>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.Symbol.Mask(System.Byte[0:,0:]@,System.Int32@)">
+ <summary>
+ Private masking method
+ </summary>
+ <param name="arrData">The symbol matrix</param>
+ <param name="intMaskType">
+ Input and Output parameter: The maksing solution.
+ If it is set to 0 to 3, Han Xin Code will choose that masking solution to mask the symbol.
+ Otherwise, Han Xin Code symbol will automatically choose masking solution based on penalty scores,
+ to find a lowest grade one, and store it in this paramter for output.
+ </param>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.Symbol.Grade(System.Byte[0:,0:]@)">
+ <summary>
+ Calculate the penalty grade for the masking solution based on Han Xin Specification
+ </summary>
+ <param name="arrData">The symbol matrix</param>
+ <returns>Integer: The penalty score of current symbol matrix</returns>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.Symbol.ChooseMask(System.Byte[0:,0:]@)">
+ <summary>
+ Automatically Choosing the maksing solution based on penalty scores.
+ </summary>
+ <param name="arrData">The symbol matrix of Han Xin Code symbol</param>
+ <returns>The selected maksing solution</returns>
+</member>
+<member name="T:renjuzhihui.shiyu.barcode.SymbolException">
+ <summary>
+ Exception for Han Xin Code Symbol Construction
+ </summary>
+</member>
+<member name="F:renjuzhihui.shiyu.barcode.SymbolException._code">
+ <summary>
+ Exception Code
+ </summary>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.SymbolException.#ctor(System.Int32,System.String,System.Exception)">
+ <summary>
+ New method
+ </summary>
+ <param name="code">Exception Code</param>
+ <param name="strMessage">Exception message</param>
+ <param name="innerException">inner exception</param>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.SymbolException.#ctor(System.Int32,System.String)">
+ <summary>
+ New method
+ </summary>
+ <param name="code">Exception Code</param>
+ <param name="strMessage">Exception message</param>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.SymbolException.#ctor(System.Int32)">
+ <summary>
+ New method
+ </summary>
+ <param name="code">Exception Code</param>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.SymbolException.#ctor(System.String,System.Exception)">
+ <summary>
+ New method
+ </summary>
+ <param name="strMessage">Exception message</param>
+ <param name="innerException">inner exception</param>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.SymbolException.#ctor(System.String)">
+ <summary>
+ New method
+ </summary>
+ <param name="strMessage">Exception message</param>
+</member>
+<member name="M:renjuzhihui.shiyu.barcode.SymbolException.#ctor">
+ <summary>
+ New method
+ </summary>
+</member>
+<member name="P:renjuzhihui.shiyu.barcode.SymbolException.ErrCode">
+ <summary>
+ Get the exception code
+ </summary>
+ <returns>The exception code</returns>
+</member>
+</members>
+</doc>
