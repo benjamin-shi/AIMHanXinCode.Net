@@ -144,7 +144,7 @@ Friend Class CodewordsStream
     ''' <summary>
     ''' Static parameter table for error correction paramters for each version and ECL
     ''' </summary>
-    Private Shared arrParameters(,,) As Integer = {
+    Private Shared ECLParameters(,,) As Integer = {
                                             {{1, 25, 21, 0, 0, 0, 0, 0, 0}, {1, 25, 17, 0, 0, 0, 0, 0, 0}, {1, 25, 13, 0, 0, 0, 0, 0, 0}, {1, 25, 9, 0, 0, 0, 0, 0, 0}},
                                             {{1, 37, 31, 0, 0, 0, 0, 0, 0}, {1, 37, 25, 0, 0, 0, 0, 0, 0}, {1, 37, 19, 0, 0, 0, 0, 0, 0}, {1, 37, 15, 0, 0, 0, 0, 0, 0}},
                                             {{1, 50, 42, 0, 0, 0, 0, 0, 0}, {1, 50, 34, 0, 0, 0, 0, 0, 0}, {1, 50, 26, 0, 0, 0, 0, 0, 0}, {1, 50, 20, 0, 0, 0, 0, 0, 0}},
@@ -248,13 +248,11 @@ Friend Class CodewordsStream
 
         If (intVersion >= MIN_VERSION) And (intVersion <= MAX_VERSION) And (intCorrectionLevel >= 1) And (intCorrectionLevel <= 4) Then
             For ii = 0 To 8
-                arrResult(ii) = arrParameters(intVersion - 1, intCorrectionLevel - 1, ii)
+                arrResult(ii) = ECLParameters(intVersion - 1, intCorrectionLevel - 1, ii)
             Next
         Else
             Throw New Exception("获取纠错参数错误：版本" & intVersion & "纠错等级" & intCorrectionLevel & "不存在！")
         End If
-
-        arrParameters = Nothing
 
         Return arrResult
     End Function

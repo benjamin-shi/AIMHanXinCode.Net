@@ -642,7 +642,7 @@ Friend Class Symbol
     ''' <summary>
     ''' The AlignmentParameters for each version
     ''' </summary>
-    Private Shared arrAlignmentParameters(,) = {
+    Private Shared arrAlignmentParameters(,) as Integer = {
                         {20, 20}, {21, 21}, {22, 22}, {23, 23}, {24, 24}, {25, 25}, {26, 26}, {27, 27}, {14, 14}, {15, 14},
                         {15, 15}, {15, 16}, {16, 16}, {17, 16}, {17, 17}, {18, 17}, {18, 18}, {19, 18}, {19, 19}, {20, 19},
                         {20, 20}, {21, 20}, {21, 21}, {15, 14}, {22, 22}, {15, 15}, {23, 23}, {15, 16}, {24, 24}, {17, 16},
