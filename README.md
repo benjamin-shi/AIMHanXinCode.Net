@@ -29,6 +29,9 @@ In this repository:
 > - [Han Xin Code](https://github.com/benjamin-shi/AIMHanXinCode.Net/tree/master/src/Han%20Xin%20Code) directory is the major source code for Han Xin encoding process from data to symbol matrix.
 > - [BarcodeTools](https://github.com/benjamin-shi/AIMHanXinCode.Net/tree/master/src/BarcodeTools) directory contains a Utility class to format data under AIM ECI specification and bitmap generation. **_please note, .Net Core and .Net Standard and UWP may not support System.Drawing.Bitmap for bitmap generation in this class_**
 
+> And you can find a [Class Diagram](https://github.com/benjamin-shi/AIMHanXinCode.Net/blob/master/document/ClassDiagram.png) in [**document**](https://github.com/benjamin-shi/AIMHanXinCode.Net/tree/master/document), like this:\
+> <img src="./document/ClassDiagram.png" width="75%" />
+
 ## Communicating with the Team
 
 The easiest way to communicate with the team is via GitHub issues. Please file new issues, feature requests and suggestions, but **DO search for similar open/closed pre-existing issues before you do**.
